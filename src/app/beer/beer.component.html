@@ -1,0 +1,29 @@
+<div class='background'>
+
+    <div class='row align-items-center'>
+        <div class='col-12 mx-auto col-sm-6'>
+            <div href="" routerLink="/"  class='d-grid gap-2 col-12 mx-auto'>
+                <button class="btn btn-primary mb-1" type="submit"><i class="fa fa-home"></i></button>
+            </div>
+            <div class="form-floating mt-1">
+                <form>
+                    <input id="BeerSearch" class="form-control" placeholder="Search Beer" value={query}
+                        onChange={handleChange} />
+                </form>
+            </div>
+            <div class="text-bg-light mb-3 ">
+
+                <div class="row ">
+                    <div key={beer.id} class="fw-semibold table-row">
+                        <div class="row g-0 text-black">
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+)
