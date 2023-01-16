@@ -1,13 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { BeerService } from '../beer.service';
 
 @Component({
-  selector: 'app-random-beer',
-  templateUrl: './random-beer.component.html',
-  styleUrls: ['./random-beer.component.css']
+  selector: 'app-beer-detail',
+  templateUrl: './beer-detail.component.html',
+  styleUrls: ['./beer-detail.component.css']
 })
-export class RandomBeerComponent implements OnInit{
+
+export class BeerDetailComponent implements OnInit{
   beer: any;
   constructor(private route: ActivatedRoute, private beerService: BeerService) {}
 

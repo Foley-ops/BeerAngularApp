@@ -7,6 +7,11 @@ import { BeerComponent } from './beer/beer.component';
 import { RandomBeerComponent } from './random-beer/random-beer.component';
 import { NewBeerComponent } from './new-beer/new-beer.component';
 import { HttpClientModule} from '@angular/common/http';
+import { BeerDetailComponent } from './beer-detail/beer-detail.component';
+import { KeyValuePipe } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -14,14 +19,17 @@ import { HttpClientModule} from '@angular/common/http';
     HomeComponent,
     BeerComponent,
     RandomBeerComponent,
-    NewBeerComponent
+    NewBeerComponent,
+    BeerDetailComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [KeyValuePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

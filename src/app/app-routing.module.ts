@@ -5,13 +5,16 @@ import { BeerComponent } from './beer/beer.component';
 import { HomeComponent } from './home/home.component';
 import { NewBeerComponent } from './new-beer/new-beer.component';
 import { RandomBeerComponent } from './random-beer/random-beer.component';
-import axios from 'axios';
+import { BeerDetailComponent } from './beer-detail/beer-detail.component';
+
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'Beer', component: BeerComponent},
-  {path: 'RandomBeer', component: RandomBeerComponent},
-  {path: 'NewBeer', component: NewBeerComponent}
+  {path: 'RandomBeer/:id', component: RandomBeerComponent},
+  {path: 'NewBeer', component: NewBeerComponent},
+  {path: 'detail/:id', component: BeerDetailComponent },
+  
 ];
 
 @NgModule({

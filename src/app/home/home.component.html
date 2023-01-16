@@ -13,9 +13,8 @@
                     </div>
                 </div>
             </div>
-            <div href="RandomBeer" routerLink="/RandomBeer" class="clickable">
+            <div href="RandomBeer" *ngFor="let beer of beer; trackBy: trackByFn" [routerLink]="['/RandomBeer', beer._id]" class="clickable">
                 <div class="card mb-1">
-
                     <img src="../assets/random-beer.png" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h1>Random Beer</h1>

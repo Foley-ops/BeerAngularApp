@@ -1,6 +1,44 @@
 
-<div class="background">
-    <div href="" routerLink="/"  class='d-grid gap-2 col-12 mx-auto'>
-        <button class="btn btn-primary mb-1" type="submit"><i class="fa fa-home"></i></button>
+       <div class='background'>
+        <div class='row align-items-center'>
+            <div class='col-12 mx-auto col-sm-6 d-grid gap-2'>
+                <button href="" routerLink="/" class="navbar btn btn-primary mb-3 mt-2 col-md-12">
+                    <i class="fa fa-home col-md-12"></i>
+                </button>
+                <div class=' mx-auto col-sm-10 text-black fw-semibold'>
+                    
+                    <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+                        <div class="mb-3 ">
+                            <label class="form-label mb-0 ">Name</label>
+                            <input type="text" class="form-control rounded-5" name="name" ngModel>
+                        </div>
+                        <div class="mb-3 ">
+                            <label htmlFor="tagline" class="form-label mb-0">Tagline</label>
+                            <input type="text" class="form-control rounded-5" name="tagline"    ngModel>
+                        </div>
+                        <div class="mb-3 ">
+                            <label htmlFor="description" class="form-label mb-0">Description</label>
+                            <textarea class="form-control rounded-5" name="Description" rows="8"  ngModel></textarea>
+                        </div>
+                        <div class="mb-1 ">
+                            <label htmlFor="first_brewed" class="form-label mb-0">First Brewed</label>
+                            <input type="text" class="form-control rounded-5" name="first_brewed"  ngModel>
+                        </div>
+                        <div class="mb-3 ">
+                            <label htmlFor="brewer_tips" class="form-label mb-0">Brewers Tips</label>
+                            <input type="text" class="form-control rounded-5" name="brewers_tips"  ngModel>
+                        </div>
+                        <div class="mb-3 ">
+                            <label htmlFor="attenuation_level" class="form-label mb-0">Attenuation Level</label>
+                            <input type="number" class="form-control rounded-5" name="attenuation_level"  ngModel>
+                        </div>
+                        <div class="mb-3">
+                            <label htmlFor="contributed_by" class="form-label mb-0" >Contributed By</label>
+                            <input type="text" class="form-control rounded-5" name="contributed_by"  ngModel>
+                        </div>
+                        <button type="submit " class="btn btn-primary d-grid gap-2 col-12 mx-auto m-3 rounded-5">ADD NEW</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-</div>

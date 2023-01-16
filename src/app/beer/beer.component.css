@@ -1,4 +1,21 @@
-.style{
+.image {
     width: '130px';
-    height: '220px'; 
-    object-fit: 'contain' }
+    height: '220px';
+    object-fit: 'contain';
+}
+
+p {
+    color: gray;
+}
+
+h1 {
+    color: Black;
+}
+
+h2 {
+    color: Black;
+}
+
+h4 {
+    color: gray;
+}

@@ -1,29 +1,32 @@
 <div class='background'>
 
     <div class='row align-items-center'>
+        
         <div class='col-12 mx-auto col-sm-6'>
-            <div href="" routerLink="/"  class='d-grid gap-2 col-12 mx-auto'>
-                <button class="btn btn-primary mb-1" type="submit"><i class="fa fa-home"></i></button>
-            </div>
-            <div class="form-floating mt-1">
-                <form>
-                    <input id="BeerSearch" class="form-control" placeholder="Search Beer" value={query}
-                        onChange={handleChange} />
-                </form>
-            </div>
-            <div class="text-bg-light mb-3 ">
+            <button href="" routerLink="/" class="navbar btn btn-primary mb-3 mt-2 col-md-12">
+                <i class="fa fa-home col-md-12"></i>
+            </button>
 
-                <div class="row ">
-                    <div key={beer.id} class="fw-semibold table-row">
-                        <div class="row g-0 text-black">
-
+            <div>
+                
+                <div class="card mb-1 clickable"  *ngFor="let beer of beers" href="BeerDetail" [routerLink]="['/detail', beer._id]">
+                    
+                    <div class="row g-0">
+                        <div class="col-md-3">
+                            <img [src]="beer.image_url" class="img-fluid rounded-start" alt="..." style="width: 130px; height: 220px; object-fit: 'contain';">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h2 class="card-title" >{{beer.name}}</h2>
+                                <h4 class="card-text">{{beer.tagline}}</h4>
+                                <p class="card-text"><small class="text-muted">Created By: {{beer.name}}</small></p>
+                            </div>
                         </div>
                     </div>
                 </div>
-
             </div>
+
 
         </div>
     </div>
 </div>
-)
