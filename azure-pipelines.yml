@@ -52,5 +52,5 @@ stages:
           deployToSlotOrASE: true
           ResourceGroupName: 'devops-angular-rg'
           SlotName: 'production'
-          packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+          packageForLinux: /app/dist/beer-app
           RuntimeStack: 'NODE|18-lts'
