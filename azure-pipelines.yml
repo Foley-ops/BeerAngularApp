@@ -52,5 +52,5 @@ stages:
           deployToSlotOrASE: true
           ResourceGroupName: 'devops-angular-rg'
           SlotName: 'production'
-          packageForLinux: /app/dist/beer-app
+          packageForLinux: /app/dist/beer-app /usr/share/nginx/html
           RuntimeStack: 'NODE|18-lts'
