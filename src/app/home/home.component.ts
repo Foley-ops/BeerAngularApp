@@ -8,6 +8,7 @@ import { BeerService } from '../beer.service';
 })
 export class HomeComponent {
   beer: any;
+  elementRef: any;
 
   constructor(private beerService: BeerService) { }
 
@@ -17,6 +18,8 @@ export class HomeComponent {
       this.beer = [data];
       console.log(this.beer);
     });
+
+    
 }
 
 trackByFn(index: number, item: any): any {

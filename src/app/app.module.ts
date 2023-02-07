@@ -11,7 +11,7 @@ import { BeerDetailComponent } from './beer-detail/beer-detail.component';
 import { KeyValuePipe } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
-
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -29,7 +29,7 @@ import { FormsModule } from '@angular/forms';
     ReactiveFormsModule,
     FormsModule
   ],
-  providers: [KeyValuePipe],
+  providers: [KeyValuePipe, {provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
