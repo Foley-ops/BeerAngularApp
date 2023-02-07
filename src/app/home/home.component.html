@@ -1,10 +1,10 @@
 <div class='background'>
     <div class='row align-items-center'>
         <div class='col-12 mx-auto col-sm-6'>
-            <div href="Beer" routerLink="/Beer" class="clickable">
+            <div href="Beer" routerLink="/Beer" class="clickable"  >
 
                 <div class="card mb-1">
-                    <img src="../assets/beers.png" class="card-img-top" alt="...">
+                    <img src="../assets/beers.png" class="card-img-top" alt="A photo of a bar made out of wood with different tabs of beer.">
                     <div class="card-body">
                         <h1>All beers</h1>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of
@@ -15,7 +15,7 @@
             </div>
             <div href="RandomBeer" *ngFor="let beer of beer; trackBy: trackByFn" [routerLink]="['/RandomBeer', beer._id]" class="clickable">
                 <div class="card mb-1">
-                    <img src="../assets/random-beer.png" class="card-img-top" alt="...">
+                    <img src="../assets/random-beer.png" class="card-img-top" alt="A photo of some metal beer tabs in a bar, lined up in a row.">
                     <div class="card-body">
                         <h1>Random Beer</h1>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of
@@ -27,7 +27,7 @@
             <div href="NewBeer" routerLink="/NewBeer" class="clickable">
                 <div class="card mb-1">
 
-                    <img src="../assets/random-beer.png" class="card-img-top" alt="...">
+                    <img src="../assets/new-beer.png" class="card-img-top" alt="A photo of a big glass of amber colored beer with foam on the top of the glass. And to the left of it is a beer called VooDoo Ranger that is in a bottle.">
                     <div class="card-body">
                         <h1>New Beer</h1>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of

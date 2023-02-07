@@ -1,5 +1,5 @@
 p {
-    color: gray;
+    color: rgb(51, 51, 51);
 }
 h1 {
     color:Black;
@@ -8,5 +8,5 @@ h2 {
     color:Black;
 }
 h4{
-    color: gray;
+    color: rgb(66, 66, 66);
 }

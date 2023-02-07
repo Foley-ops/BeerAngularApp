@@ -5,17 +5,29 @@
 }
 
 p {
-    color: gray;
+    color: rgb(9, 35, 78);
 }
 
 h1 {
     color: Black;
 }
 
-h2 {
-    color: Black;
-}
 
-h4 {
-    color: gray;
+h2 {
+    color: rgb(21, 81, 183);
+    font-size: 22px;
 }
+.rounded-pill {
+    border-radius: 20px;
+  }
+  
+  .dropdown-toggle {
+    background-color: #ADD8E6;
+  }
+  .dropdown {
+    display: none;
+  }
+  
+  .dropdown.show {
+    display: block;
+  }
