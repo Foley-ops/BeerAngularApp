@@ -4,25 +4,47 @@ trigger:
 
 pool:
   name: Azure Pipelines
-steps:
-- task: Docker@0
-  displayName: 'Build an image'
-  inputs:
-    azureSubscription: 'Azure for Students(2a5141e6-54fb-4506-b600-4eded22b4219)'
-    azureContainerRegistry: '{"loginServer":"nfoley.azurecr.io", "id" : "/subscriptions/2a5141e6-54fb-4506-b600-4eded22b4219/resourceGroups/angular-demo/providers/Microsoft.ContainerRegistry/registries/nfoley"}'
-    dockerFile: Dockerfile
-    imageName: 'dev-image-$(Build.Repository.Name):$(Build.BuildId)'
+stages:
 
-- task: Docker@0
-  displayName: 'Push an image'
-  inputs:
-    azureSubscription: 'Azure for Students(2a5141e6-54fb-4506-b600-4eded22b4219)'
-    azureContainerRegistry: '{"loginServer":"nfoley.azurecr.io", "id" : "/subscriptions/2a5141e6-54fb-4506-b600-4eded22b4219/resourceGroups/angular-demo/providers/Microsoft.ContainerRegistry/registries/nfoley"}'
-    action: 'Push an image'
-    imageName: 'dev-image-$(Build.Repository.Name):$(Build.BuildId)'
+- stage: Linter
+  displayName: Lint Dockerfile
+  jobs:  
+  - job: Linter
+    displayName: Lint do Dockerfile
+    steps:
+    - task: CmdLine@2
+      displayName: hadolint
+      continueOnError: true
+      inputs:
+        script: 'docker run --rm -i hadolint/hadolint:latest-alpine < Dockerfile'
 
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact: dev_artifact'
-  inputs:
-    PathtoPublish: Dockerfile
-    ArtifactName: 'dev_artifact'
+- stage: Build
+  displayName: Build, Publish, and Scan
+  jobs:
+  - job: Build
+    steps:
+    - task: Docker@0
+      displayName: 'Build an image'
+      inputs:
+        azureSubscription: 'Azure for Students(2a5141e6-54fb-4506-b600-4eded22b4219)'
+        azureContainerRegistry: '{"loginServer":"nfoley.azurecr.io", "id" : "/subscriptions/2a5141e6-54fb-4506-b600-4eded22b4219/resourceGroups/angular-demo/providers/Microsoft.ContainerRegistry/registries/nfoley"}'
+        dockerFile: Dockerfile
+        imageName: 'dev-image-$(Build.Repository.Name):$(Build.BuildId)'
+    - task: CmdLine@2
+      displayName: Scan Image
+      continueOnError: true
+      inputs:
+        script: docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v $HOME/Library/Caches:/root/.cache/ aquasec/trivy image --exit-code=1 --severity="HIGH,CRITICAL" --ignore-unfixed $(REGISTRY_NAME)/$(IMAGE_NAME):$(TAG)
+    - task: Docker@0
+      displayName: 'Push an image'
+      inputs:
+        azureSubscription: 'Azure for Students(2a5141e6-54fb-4506-b600-4eded22b4219)'
+        azureContainerRegistry: '{"loginServer":"nfoley.azurecr.io", "id" : "/subscriptions/2a5141e6-54fb-4506-b600-4eded22b4219/resourceGroups/angular-demo/providers/Microsoft.ContainerRegistry/registries/nfoley"}'
+        action: 'Push an image'
+        imageName: 'dev-image-$(Build.Repository.Name):$(Build.BuildId)'
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Artifact: dev_artifact'
+      inputs:
+        PathtoPublish: Dockerfile
+        ArtifactName: 'dev_artifact'
