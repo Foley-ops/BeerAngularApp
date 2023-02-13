@@ -10,7 +10,7 @@ stages:
   displayName: Lint Dockerfile
   jobs:  
   - job: Linter
-    displayName: Lint do Dockerfile
+    displayName: Lint Dockerfile
     steps:
     - task: CmdLine@2
       displayName: hadolint
