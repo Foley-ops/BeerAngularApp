@@ -20,7 +20,7 @@ steps:
     azureSubscription: 'Azure for Students(2a5141e6-54fb-4506-b600-4eded22b4219)'
     azureContainerRegistry: '{"loginServer":"nfoley.azurecr.io", "id" : "/subscriptions/2a5141e6-54fb-4506-b600-4eded22b4219/resourceGroups/angular-demo/providers/Microsoft.ContainerRegistry/registries/nfoley"}'
     dockerFile: Dockerfile
-    imageName: 'dev-image-$(Build.Repository.Name):$(Build.BuildId)'
+    imageName: 'image-$(Build.Repository.Name):$(Build.BuildId)'
 
 - task: Docker@0
   displayName: 'Push an image'
@@ -28,7 +28,7 @@ steps:
     azureSubscription: 'Azure for Students(2a5141e6-54fb-4506-b600-4eded22b4219)'
     azureContainerRegistry: '{"loginServer":"nfoley.azurecr.io", "id" : "/subscriptions/2a5141e6-54fb-4506-b600-4eded22b4219/resourceGroups/angular-demo/providers/Microsoft.ContainerRegistry/registries/nfoley"}'
     action: 'Push an image'
-    imageName: 'dev-image-$(Build.Repository.Name):$(Build.BuildId)'
+    imageName: 'image-$(Build.Repository.Name):$(Build.BuildId)'
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: drop'
