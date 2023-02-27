@@ -1,5 +1,5 @@
 # Docker
-# Build a Docker image
+# Build and push an image to Azure Container Registry
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
 trigger:
@@ -9,28 +9,37 @@ resources:
 - repo: self
 
 variables:
+  # Container registry service connection established during pipeline creation
+  dockerRegistryServiceConnection: 'b8795824-4d82-4bd9-8a1f-3617dc4af61b'
+  imageRepository: 'foleyopsbeerangularapp'
+  containerRegistry: 'beerappdemo.azurecr.io'
+  dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
   tag: '$(Build.BuildId)'
 
-pool:
-  name: Azure Pipelines
-steps:
-- task: Docker@0
-  displayName: 'Build an image'
-  inputs:
-    azureSubscription: 'Azure for Students(2a5141e6-54fb-4506-b600-4eded22b4219)'
-    azureContainerRegistry: '{"loginServer":"nfoley.azurecr.io", "id" : "/subscriptions/2a5141e6-54fb-4506-b600-4eded22b4219/resourceGroups/angular-demo/providers/Microsoft.ContainerRegistry/registries/nfoley"}'
-    dockerFile: Dockerfile
-    imageName: 'dev-image-$(Build.Repository.Name):$(Build.BuildId)'
+  # Agent VM image name
+  vmImageName: 'ubuntu-latest'
 
-- task: Docker@0
-  displayName: 'Push an image'
-  inputs:
-    azureSubscription: 'Azure for Students(2a5141e6-54fb-4506-b600-4eded22b4219)'
-    azureContainerRegistry: '{"loginServer":"nfoley.azurecr.io", "id" : "/subscriptions/2a5141e6-54fb-4506-b600-4eded22b4219/resourceGroups/angular-demo/providers/Microsoft.ContainerRegistry/registries/nfoley"}'
-    action: 'Push an image'
-    imageName: 'dev-image-$(Build.Repository.Name):$(Build.BuildId)'
+stages:
+- stage: Build
+  displayName: Build and push stage
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
 
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact: drop'
-  inputs:
-    PathtoPublish: Dockerfile
+    - task: AzureWebAppContainer@1
+      inputs:
+        azureSubscription: 'Azure subscription 1 (b315285e-9af0-4b2a-9c7d-b79ae535f858)'
+        appName: 'Development-Webapp-Beer'
+        containers: 'dev-$(Build.Repository.Name):$(Build.BuildId)'
