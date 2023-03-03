@@ -1,18 +1,12 @@
-ARG NODE_VERSION=lts
-ARG APP_DIR=/app
-ARG EXPOSE_PORT=80
-
-# stage1
-FROM node:${NODE_VERSION} as node
-WORKDIR ${APP_DIR}
+FROM node:lts as node
+WORKDIR /app
 COPY . .
-EXPOSE ${EXPOSE_PORT}
+EXPOSE 80
 RUN npm install && npm run build --prod
 
-# stage2
-ARG NGINX_VERSION=alpine
-FROM nginx:${NGINX_VERSION}
-RUN apk --no-cache add \
+#stage2
+FROM nginx:alpine
+RUN apk --no-cache add \ 
     libcrypto3=3.0.8-r0 \
     libssl3=3.0.8-r0 \
     libxpm=3.5.15-r0
