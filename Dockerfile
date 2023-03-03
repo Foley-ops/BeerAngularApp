@@ -1,6 +1,7 @@
 FROM node:lts as node
 WORKDIR /app
 COPY . .
+EXPOSE 80
 RUN npm install && npm run build --prod
 
 #stage2
